@@ -1,0 +1,16 @@
+---
+clouds:
+  - name: outscale
+    region: eu-west-2
+    user: outscale
+
+# Listes des cloud cible
+logging:
+  format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  level: INFO
+
+# Listes des tests
+tests:
+  services:
+    - sshd
+    - cloud-init

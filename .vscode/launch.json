@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug image-validator",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "${workspaceFolder}/launch_image_validator.py",
+      "console": "integratedTerminal",
+      "justMyCode": true
+    }
+  ]
+}
