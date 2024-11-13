@@ -1,4 +1,11 @@
 ---
+# Listes des tests
+analyzers:
+  config_keys:
+    GRUB_CMDLINE_LINUX: /etc/default/grub/GRUB_CMDLINE_LINUX
+    PasswordAuthentication: /etc/ssh/sshd_config/PasswordAuthentication
+    PermitRootLogin: /etc/ssh/sshd_config/PermitRootLogin
+
 clouds:
   - name: outscale
     region: eu-west-2
@@ -9,8 +16,3 @@ logging:
   format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
   level: INFO
 
-# Listes des tests
-tests:
-  services:
-    - sshd
-    - cloud-init
