@@ -42,14 +42,23 @@ class ImageVM:
             self.g.aug_init("/", 0)
             for key in self.config["analyzers"]["config_keys"]:
                 if "regexp" not in self.config["analyzers"]["config_keys"][key]:
+                    config_value = self.get_config(
+                        "/files%s" % self.config["analyzers"]["config_keys"][key]
+                    )
                     logging.info(
-                        f"Contenu de la ligne {key} {self.get_config("/files%s" % self.config["analyzers"]["config_keys"][key] )}"
+                        f"Contenu de la ligne {key}: {config_value}"
+                        if len(config_value) > 50
+                        else f"Contenu de la ligne {key}: {config_value}"
                     )
                 else:
-                    logging.info(
-                        f"Contenu de la ligne {key} {self.match_config("/files%s" % self.config["analyzers"]["config_keys"][key] )}"
+                    match_value = self.match_config(
+                        "/files%s" % self.config["analyzers"]["config_keys"][key]
                     )
-
+                    logging.info(
+                        f"Contenu de la ligne {key}: {match_value}"
+                        if len(match_value) > 50
+                        else f"Contenu de la ligne {key}: {match_value}"
+                    )
             # Fermez Augeas et libérez ses ressources
             kernel_version = self.g.ls("/lib/modules/")[0]
             logging.info(f"Version du noyau trouvée : {kernel_version}")
@@ -95,7 +104,9 @@ class ImageVM:
         logging.info("Vérification des services essentiels.")
         services = []
         for service in services:
-            logging.info(f"Service {service} : {g.inspect_get_service_status(service)}")
+            logging.info(
+                f"Service {service} : {self.g.inspect_get_service_status(service)}"
+            )
         # Exemple de vérification de services
 
     def get_config(self, node):
@@ -104,7 +115,10 @@ class ImageVM:
         """
         try:
             param = self.g.aug_get(node)
-        except:
+        except Exception as e:
+            logging.error(
+                f"An error occurred while getting the value of the node : {e}"
+            )
             param = "Undef"
         return param
 
@@ -114,7 +128,10 @@ class ImageVM:
         """
         try:
             param = self.g.aug_match(node)
-        except:
+        except Exception as e:
+            logging.error(
+                f"An error occurred while getting the value of the node : {e}"
+            )
             param = "Undef"
         return param
 

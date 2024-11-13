@@ -33,7 +33,9 @@ def main(config, image):
         vm = ImageVM(config, image)
         vm.analyze()
     except Exception as e:
-        logging.error(f"Erreur lors de la validation de l'image {image} : {e}")
+        logging.error(
+            f"Erreur lors de la validation de l'image {image} : {e}"
+        )
 
     logging.info("Validation terminée.")
 
