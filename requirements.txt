@@ -2,4 +2,4 @@ click==8.1.7
 flake8==7.1.1
 guestfs @ http://libguestfs.org/download/python/guestfs-1.40.2.tar.gz#sha256=1822b0921ac85cfcf484faf07b762b86512be93b836108af0f3a4c959f820332
 PyYAML==6.0.2
-setuptools==75.4.0
+setuptools==75.5.0
